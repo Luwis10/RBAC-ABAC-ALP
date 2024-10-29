@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title> <!-- Menampilkan judul halaman yang akan terlihat di tab browser -->
+</head>
+<body>
+    <!-- Bagian header untuk judul halaman -->
+    <h2>Login</h2>
+
+    <!-- Formulir login yang mengirimkan data ke server melalui metode POST -->
+    <form action="/login" method="post">
+        <!-- Label dan input untuk username -->
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required> <!-- "required" memastikan pengguna harus mengisi kolom ini -->
+        <br><br> <!-- Menambahkan spasi antara elemen form -->
+
+        <!-- Label dan input untuk password -->
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required> <!-- "password" untuk menjaga keamanan input -->
+        <br><br> <!-- Menambahkan spasi antara elemen form -->
+
+        <!-- Tombol untuk mengirimkan formulir login -->
+        <button type="submit">Login</button>
+    </form>
+
+    <!-- Script untuk mengelola fungsi logout -->
+    <script>
+        /**
+         * Fungsi logout untuk mengakhiri sesi pengguna dengan permintaan POST
+         * ke endpoint /logout di server. Setelah logout, pengguna akan diarahkan
+         * kembali ke halaman login.
+         */
+        function logout() {
+            fetch('/logout', { // Mengirim permintaan ke server menggunakan metode POST
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded', // Header konten
+                }
+            })
+            .then(response => response.text()) // Mengambil respons sebagai teks
+            .then(data => {
+                alert(data); // Menampilkan pesan respons dari server
+                window.location.href = '/login'; // Mengarahkan ke halaman login setelah logout
+            })
+            .catch(err => console.log(err)); // Menampilkan error di console jika ada
+        }
+    </script>
+</body>
+</html>
